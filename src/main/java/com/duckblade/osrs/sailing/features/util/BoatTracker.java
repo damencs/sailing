@@ -13,12 +13,11 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
 import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
 import net.runelite.api.WorldEntity;
 import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.WorldEntityDespawned;
 import net.runelite.api.events.WorldEntitySpawned;
 import net.runelite.client.eventbus.Subscribe;
@@ -33,19 +32,11 @@ public class BoatTracker
 	private static final int WORLD_ENTITY_TYPE_BOAT = 2;
 
 	private final Map<Integer, Boat> trackedBoats = new HashMap<>();
+	private final Client client;
 
 	public void shutDown()
 	{
 		trackedBoats.clear();
-	}
-
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged e)
-	{
-		if (e.getGameState() == GameState.LOADING)
-		{
-			trackedBoats.clear();
-		}
 	}
 
 	@Subscribe
@@ -63,7 +54,10 @@ public class BoatTracker
 	@Subscribe
 	public void onWorldEntityDespawned(WorldEntityDespawned e)
 	{
-		trackedBoats.remove(e.getWorldEntity().getWorldView().getId());
+		if (trackedBoats.remove(e.getWorldEntity().getWorldView().getId()) != null)
+		{
+			log.debug("removed tracking boat from wv {}", e.getWorldEntity().getWorldView().getId());
+		}
 	}
 
 	@Subscribe
@@ -79,22 +73,27 @@ public class BoatTracker
 		if (HullTier.fromGameObjectId(o.getId()) != null)
 		{
 			boat.setHull(o);
+			log.debug("found hull {}={}+{} for boat in wv {}", o.getId(), boat.getHullTier(), boat.getSizeClass(), boat.getWorldViewId());
 		}
 		if (SailTier.fromGameObjectId(o.getId()) != null)
 		{
 			boat.setSail(o);
+			log.debug("found sail {}={} for boat in wv {}", o.getId(), boat.getSailTier(), boat.getWorldViewId());
 		}
 		if (HelmTier.fromGameObjectId(o.getId()) != null)
 		{
 			boat.setHelm(o);
+			log.debug("found helm {}={} for boat in wv {}", o.getId(), boat.getHelmTier(), boat.getWorldViewId());
 		}
 		if (SalvagingHookTier.fromGameObjectId(o.getId()) != null)
 		{
 			boat.setSalvagingHook(o);
+			log.debug("found salvaging hook {}={} for boat in wv {}", o.getId(), boat.getSalvagingHookTier(), boat.getWorldViewId());
 		}
 		if (CargoHoldTier.fromGameObjectId(o.getId()) != null)
 		{
 			boat.setCargoHold(o);
+			log.debug("found cargo hold {}={} for boat in wv {}", o.getId(), boat.getCargoHoldTier(), boat.getWorldViewId());
 		}
 	}
 
@@ -111,23 +110,33 @@ public class BoatTracker
 		if (boat.getHull() == o)
 		{
 			boat.setHull(null);
+			log.debug("unsetting hull for boat in wv {}", boat.getWorldViewId());
 		}
 		if (boat.getSail() == o)
 		{
 			boat.setSail(null);
+			log.debug("unsetting sail for boat in wv {}", boat.getWorldViewId());
 		}
 		if (boat.getHelm() == o)
 		{
 			boat.setHelm(null);
+			log.debug("unsetting helm for boat in wv {}", boat.getWorldViewId());
 		}
 		if (boat.getSalvagingHook() == o)
 		{
 			boat.setSalvagingHook(null);
+			log.debug("unsetting salvaging hook for boat in wv {}", boat.getWorldViewId());
 		}
 		if (boat.getCargoHold() == o)
 		{
 			boat.setCargoHold(null);
+			log.debug("unsetting cargo hold for boat in wv {}", boat.getWorldViewId());
 		}
+	}
+
+	public Boat getBoat()
+	{
+		return getBoat(client.getLocalPlayer().getWorldView().getId());
 	}
 
 	public Boat getBoat(int wvId)

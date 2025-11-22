@@ -1,6 +1,7 @@
 package com.duckblade.osrs.sailing.module;
 
 import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialHelper;
+import com.duckblade.osrs.sailing.features.CargoHoldTracker;
 import com.duckblade.osrs.sailing.features.util.BoatTracker;
 import com.duckblade.osrs.sailing.features.LuffOverlay;
 import com.duckblade.osrs.sailing.features.RapidsOverlay;
@@ -27,6 +28,7 @@ public class SailingModule extends AbstractModule
 	@Provides
 	Set<PluginLifecycleComponent> lifecycleComponents(
 		BarracudaTrialHelper barracudaTrialHelper,
+		CargoHoldTracker cargoHoldTracker,
 		BoatTracker boatTracker,
 		LuffOverlay luffOverlay,
 		RapidsOverlay rapidsOverlay,
@@ -35,6 +37,7 @@ public class SailingModule extends AbstractModule
 	{
 		return ImmutableSet.of(
 			barracudaTrialHelper,
+			cargoHoldTracker,
 			boatTracker,
 			luffOverlay,
 			rapidsOverlay,

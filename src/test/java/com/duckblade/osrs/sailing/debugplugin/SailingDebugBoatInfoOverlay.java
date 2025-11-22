@@ -48,6 +48,7 @@ public class SailingDebugBoatInfoOverlay extends OverlayPanel
 
 		for (WorldEntity we : client.getTopLevelWorldView().worldEntities())
 		{
+			LocalPoint location = we.getLocalLocation();
 			if (we.isHiddenForOverlap())
 			{
 				continue;
@@ -56,10 +57,15 @@ public class SailingDebugBoatInfoOverlay extends OverlayPanel
 			Boat boat = boatTracker.getBoat(we.getWorldView().getId());
 			if (boat == null)
 			{
+				String text = "UNTRACKED BOAT: " + we.getWorldView().getId();
+				Point p = Perspective.getCanvasTextLocation(client, graphics, location, text, 0);
+				if (p != null)
+				{
+					OverlayUtil.renderTextLocation(graphics, p, text, Color.YELLOW);
+				}
 				continue;
 			}
 
-			LocalPoint location = we.getLocalLocation();
 			String text = boat.getDebugString();
 			Point p = Perspective.getCanvasTextLocation(client, graphics, location, text, 0);
 			if (p != null)

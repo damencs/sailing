@@ -199,7 +199,7 @@ public class RapidsOverlay
 			return COLOR_RAPID_UNKNOWN;
 		}
 
-		Boat boat = boatTracker.getBoat(client.getLocalPlayer().getWorldView().getId());
+		Boat boat = boatTracker.getBoat();
 		if (boat == null)
 		{
 			return COLOR_RAPID_UNKNOWN;

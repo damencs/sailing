@@ -1,7 +1,9 @@
 package com.duckblade.osrs.sailing.model;
 
+import com.duckblade.osrs.sailing.features.util.SailingUtil;
 import lombok.Data;
 import lombok.Getter;
+import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 
 @Data
@@ -42,6 +44,27 @@ public class Boat
 	public CargoHoldTier getCargoHoldTier()
 	{
 		return cargoHold != null ? CargoHoldTier.fromGameObjectId(cargoHold.getId()) : null;
+	}
+
+	public SizeClass getSizeClass()
+	{
+		return SizeClass.fromGameObjectId(hull.getId());
+	}
+
+	public int getCargoCapacity(boolean uim)
+	{
+		CargoHoldTier cargoHoldTier = getCargoHoldTier();
+		if (cargoHoldTier == null)
+		{
+			return 0;
+		}
+
+		return cargoHoldTier.getCapacity(getSizeClass(), uim);
+	}
+
+	public int getCargoCapacity(Client client)
+	{
+		return getCargoCapacity(SailingUtil.isUim(client));
 	}
 
 	public String getDebugString()

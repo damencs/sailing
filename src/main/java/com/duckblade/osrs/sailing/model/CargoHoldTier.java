@@ -2,8 +2,10 @@ package com.duckblade.osrs.sailing.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.gameval.ObjectID;
 
+@Slf4j
 @RequiredArgsConstructor
 @Getter
 public enum CargoHoldTier
@@ -17,6 +19,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_REGULAR_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_REGULAR_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_REGULAR_LARGE_OPEN,
+		},
+		new int[]{
+			20,
+			30,
+			40,
+			4,
 		}
 	),
 	OAK(
@@ -27,6 +35,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_OAK_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_OAK_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_OAK_LARGE_OPEN,
+		},
+		new int[]{
+			30,
+			45,
+			60,
+			5,
 		}
 	),
 	TEAK(
@@ -37,6 +51,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_TEAK_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_TEAK_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_TEAK_LARGE_OPEN,
+		},
+		new int[]{
+			45,
+			60,
+			75,
+			6,
 		}
 	),
 	MAHOGANY(
@@ -47,6 +67,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_MAHOGANY_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_MAHOGANY_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_MAHOGANY_LARGE_OPEN,
+		},
+		new int[]{
+			60,
+			90,
+			120,
+			7,
 		}
 	),
 	CAMPHOR(
@@ -57,6 +83,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_CAMPHOR_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_CAMPHOR_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_CAMPHOR_LARGE_OPEN,
+		},
+		new int[]{
+			80,
+			120,
+			160,
+			8,
 		}
 	),
 	IRONWOOD(
@@ -67,6 +99,12 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_IRONWOOD_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_IRONWOOD_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_IRONWOOD_LARGE_OPEN,
+		},
+		new int[]{
+			105,
+			150,
+			210,
+			9,
 		}
 	),
 	ROSEWOOD(
@@ -77,11 +115,18 @@ public enum CargoHoldTier
 			ObjectID.SAILING_BOAT_CARGO_HOLD_ROSEWOOD_2X5_OPEN,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_ROSEWOOD_LARGE,
 			ObjectID.SAILING_BOAT_CARGO_HOLD_ROSEWOOD_LARGE_OPEN,
+		},
+		new int[]{
+			-1,
+			-1,
+			-1,
+			-1,
 		}
 	),
 	;
 
 	private final int[] gameObjectIds;
+	private final int[] capacities; // raft, skiff, sloop, uim
 
 	public static CargoHoldTier fromGameObjectId(int id)
 	{
@@ -97,6 +142,27 @@ public enum CargoHoldTier
 		}
 
 		return null;
+	}
+
+	public int getCapacity(SizeClass sizeClass, boolean uim)
+	{
+		if (uim)
+		{
+			return capacities[3];
+		}
+
+		switch (sizeClass)
+		{
+			case RAFT:
+				return capacities[0];
+			case SKIFF:
+				return capacities[1];
+			case SLOOP:
+				return capacities[2];
+			default:
+				log.error("Unknown size class {}", sizeClass);
+				return -1;
+		}
 	}
 
 }

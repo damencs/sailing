@@ -82,7 +82,7 @@ public class LuffOverlay
 			return null;
 		}
 
-		Boat boat = boatTracker.getBoat(client.getLocalPlayer().getWorldView().getId());
+		Boat boat = boatTracker.getBoat();
 		GameObject sail = boat != null ? boat.getSail() : null;
 		Shape convextHull = sail != null ? sail.getConvexHull() : null;
 		if (convextHull != null)
