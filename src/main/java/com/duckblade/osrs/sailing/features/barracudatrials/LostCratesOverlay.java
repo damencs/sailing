@@ -26,11 +26,11 @@ import java.util.Set;
 
 @Slf4j
 @Singleton
-public class BarracudaTrialHelper
+public class LostCratesOverlay
 	extends Overlay
 	implements PluginLifecycleComponent
 {
-	private static final Set<Integer> LOST_CARGO_IDS = ImmutableSet.of(
+	private static final Set<Integer> LOST_CRATES_IDS = ImmutableSet.of(
 			ObjectID.SAILING_BT_GWENITH_GLIDE_COLLECTABLE_1,
 			ObjectID.SAILING_BT_GWENITH_GLIDE_COLLECTABLE_2,
 			ObjectID.SAILING_BT_GWENITH_GLIDE_COLLECTABLE_3,
@@ -225,11 +225,11 @@ public class BarracudaTrialHelper
 	private final SailingConfig config;
 
 	private boolean inTrial;
-	private final Set<GameObject> lostCargo = new HashSet<>();
-	private Color crateColour;
+	private final Set<GameObject> lostCrates = new HashSet<>();
+	private Color crateColor;
 
 	@Inject
-	public BarracudaTrialHelper(Client client, SailingConfig config)
+	public LostCratesOverlay(Client client, SailingConfig config)
 	{
 		this.client = client;
 		this.config = config;
@@ -241,7 +241,7 @@ public class BarracudaTrialHelper
 	@Override
 	public boolean isEnabled(SailingConfig config)
 	{
-		crateColour = config.barracudaHighlightLostCratesColour();
+		crateColor = config.barracudaHighlightLostCratesColour();
 		return config.barracudaHighlightLostCrates();
 	}
 
@@ -249,7 +249,7 @@ public class BarracudaTrialHelper
 	public void shutDown()
 	{
 		inTrial = false;
-		lostCargo.clear();
+		lostCrates.clear();
 	}
 
 	@Subscribe
@@ -258,7 +258,7 @@ public class BarracudaTrialHelper
 		if (e.getGameState() == GameState.LOGIN_SCREEN || e.getGameState() == GameState.HOPPING)
 		{
 			inTrial = false;
-			lostCargo.clear();
+			lostCrates.clear();
 			log.debug("onGameStateChanged: cleared lost crates");
 		}
 	}
@@ -267,16 +267,16 @@ public class BarracudaTrialHelper
 	public void onGameObjectSpawned(GameObjectSpawned e)
 	{
 		GameObject o = e.getGameObject();
-		if (LOST_CARGO_IDS.contains(o.getId()))
+		if (LOST_CRATES_IDS.contains(o.getId()))
 		{
-			lostCargo.add(o);
+			lostCrates.add(o);
 		}
 	}
 
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned e)
 	{
-		lostCargo.remove(e.getGameObject());
+		lostCrates.remove(e.getGameObject());
 	}
 
 	@Subscribe
@@ -284,7 +284,7 @@ public class BarracudaTrialHelper
 	{
 		if (e.getWorldView().isTopLevel())
 		{
-			lostCargo.clear();
+			lostCrates.clear();
 		}
 	}
 
@@ -301,7 +301,7 @@ public class BarracudaTrialHelper
 			else
 			{
 				inTrial = false;
-				lostCargo.clear();
+				lostCrates.clear();
 				log.debug("exited trial");
 			}
 		}
@@ -315,23 +315,23 @@ public class BarracudaTrialHelper
 			return null;
 		}
 
-		for (GameObject cargo : lostCargo)
+		for (GameObject crate : lostCrates)
 		{
-			ObjectComposition def = SailingUtil.getTransformedObject(client, cargo);
+			ObjectComposition def = SailingUtil.getTransformedObject(client, crate);
 			if (def != null)
 			{
 				if (config.barracudaExpandHighlightLostCrates())
 				{
-					Polygon poly = SailingUtil.getExpandedGameObjectPoly(client, cargo, 4);
+					Polygon poly = SailingUtil.getExpandedGameObjectPoly(client, crate, 4);
 
 					if (poly != null)
 					{
-						OverlayUtil.renderPolygon(g, poly, crateColour);
+						OverlayUtil.renderPolygon(g, poly, crateColor);
 					}
 				}
 				else
 				{
-					OverlayUtil.renderTileOverlay(g, cargo, "", crateColour);
+					OverlayUtil.renderTileOverlay(g, crate, "", crateColor);
 				}
 			}
 		}
