@@ -252,9 +252,9 @@ public class LostCratesOverlay
 	}
 
 	@Subscribe
-	public void onGameStateChanged(GameStateChanged e)
+	public void onWorldViewUnloaded(WorldViewUnloaded e)
 	{
-		if (e.getGameState() == GameState.LOGIN_SCREEN || e.getGameState() == GameState.HOPPING)
+		if (e.getWorldView().isTopLevel())
 		{
 			lostCrates.clear();
 		}
@@ -274,15 +274,6 @@ public class LostCratesOverlay
 	public void onGameObjectDespawned(GameObjectDespawned e)
 	{
 		lostCrates.remove(e.getGameObject());
-	}
-
-	@Subscribe
-	public void onWorldViewUnloaded(WorldViewUnloaded e)
-	{
-		if (e.getWorldView().isTopLevel())
-		{
-			lostCrates.clear();
-		}
 	}
 
 	@Override

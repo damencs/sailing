@@ -157,11 +157,6 @@ public class RapidsOverlay
 	{
 		GameObject o = e.getGameObject();
 
-		if (o == null || o.getWorldView() == null)
-		{
-			return;
-		}
-		
 		if (RAPIDS_IDS.contains(o.getId()))
 		{
 			rapids.add(o);
@@ -171,11 +166,6 @@ public class RapidsOverlay
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned e)
 	{
-		if (e.getGameObject() == null)
-		{
-			return;
-		}
-
 		rapids.remove(e.getGameObject());
 	}
 
