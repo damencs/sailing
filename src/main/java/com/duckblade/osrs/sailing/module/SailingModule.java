@@ -1,5 +1,6 @@
 package com.duckblade.osrs.sailing.module;
 
+import com.duckblade.osrs.sailing.features.barracudatrials.RumBoatOverlay;
 import com.duckblade.osrs.sailing.features.crewmates.CrewmateOverheadMuter;
 import com.duckblade.osrs.sailing.features.charting.SeaChartPanelOverlay;
 import com.duckblade.osrs.sailing.features.charting.SeaChartTaskIndex;
@@ -36,6 +37,7 @@ public class SailingModule extends AbstractModule
 	Set<PluginLifecycleComponent> lifecycleComponents(
 		BarracudaTrialTracker barracudaTrialTracker,
 		LostCratesOverlay lostCratesOverlay,
+		RumBoatOverlay rumBoatOverlay,
 		BoatTracker boatTracker,
 //		CargoHoldTracker cargoHoldTracker,
 		CrewmateOverheadMuter crewmateOverheadMuter,
@@ -53,6 +55,7 @@ public class SailingModule extends AbstractModule
 		return ImmutableSet.of(
 			barracudaTrialTracker,
 			lostCratesOverlay,
+			rumBoatOverlay,
 			boatTracker,
 //			cargoHoldTracker,
 			crewmateOverheadMuter,

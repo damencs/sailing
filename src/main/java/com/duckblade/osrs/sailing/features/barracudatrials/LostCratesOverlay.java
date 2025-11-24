@@ -6,10 +6,8 @@ import com.duckblade.osrs.sailing.features.util.SailingUtil;
 import com.duckblade.osrs.sailing.module.PluginLifecycleComponent;
 import com.google.common.collect.ImmutableSet;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.GameObject;
-import net.runelite.api.GameState;
-import net.runelite.api.ObjectComposition;
+import net.runelite.api.*;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.events.*;
 import net.runelite.api.gameval.ObjectID;
 import net.runelite.client.eventbus.Subscribe;
@@ -22,6 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.awt.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Slf4j
@@ -301,7 +300,7 @@ public class LostCratesOverlay
 			{
 				if (config.barracudaExpandHighlightLostCrates())
 				{
-					Polygon poly = SailingUtil.getExpandedGameObjectPoly(client, crate, 4);
+					Polygon poly = Perspective.getCanvasTileAreaPoly(client, Objects.requireNonNull(LocalPoint.fromWorld(client, crate.getWorldLocation())), 4);
 
 					if (poly != null)
 					{

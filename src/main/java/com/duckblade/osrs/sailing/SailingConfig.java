@@ -279,6 +279,31 @@ public interface SailingConfig extends Config
 		return false;
 	}
 
+	@ConfigItem(
+			keyName = "barracudaHighlightTemporTantrumRumBoat",
+			name = "Highlight Rum Boat",
+			description = "Highlight the rum boat in the Tempor Tantrum Barracuda Trial depending on current state",
+			section = SECTION_BARRACUDA_TRIALS,
+			position = 4
+	)
+	default boolean barracudaHighlightTemporTantrumRumBoat()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "barracudaHighlightTemporTantrumRumBoatColor",
+			name = "Rum Boat Color",
+			description = "The color to highlight the Tempor Tantrum Trial rum boat",
+			section = SECTION_BARRACUDA_TRIALS,
+			position = 5
+	)
+	@Alpha
+	default Color barracudaHighlightTemporTantrumRumBoatColor()
+	{
+		return new Color(205, 57, 72);
+	}
+
 	// 7. Cargo Hold Tracking
 	@ConfigItem(
 		keyName = "cargoHoldShowCounts",
