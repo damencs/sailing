@@ -95,7 +95,7 @@ public interface SailingConfig extends Config
 			name = "Highlight Lightning Cloud Strikes",
 			description = "Highlights the lightning clouds that are about to strike and should be avoided",
 			section = SECTION_NAVIGATION,
-			position = 4
+			position = 5
 	)
 	default boolean highlightLightningCloudStrikes()
 	{
@@ -107,7 +107,7 @@ public interface SailingConfig extends Config
 			name = "Lightning Strike Colour",
 			description = "Colour to highlight lightning cloud strikes. Colour will appear darker when about to strike.",
 			section = SECTION_NAVIGATION,
-			position = 5
+			position = 6
 	)
 	@Alpha
 	default Color lightningCloudStrikeColour()
