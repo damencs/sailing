@@ -1,11 +1,15 @@
 package com.duckblade.osrs.sailing.module;
 
 import com.duckblade.osrs.sailing.SailingConfig;
-import com.duckblade.osrs.sailing.features.LowDetail;
-import com.duckblade.osrs.sailing.features.barracudatrials.LostCratesOverlay;
-import com.duckblade.osrs.sailing.features.barracudatrials.RumBoatOverlay;
-import com.duckblade.osrs.sailing.features.cargohold.CargoHoldTracker;
-import com.duckblade.osrs.sailing.features.charting.*;
+import com.duckblade.osrs.sailing.features.facilities.CargoHoldTracker;
+import com.duckblade.osrs.sailing.features.facilities.LuffOverlay;
+import com.duckblade.osrs.sailing.features.navigation.RapidsOverlay;
+import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialHelper;
+import com.duckblade.osrs.sailing.features.charting.CurrentDuckTaskTracker;
+import com.duckblade.osrs.sailing.features.charting.SeaChartOverlay;
+import com.duckblade.osrs.sailing.features.charting.SeaChartPanelOverlay;
+import com.duckblade.osrs.sailing.features.charting.SeaChartTaskIndex;
+import com.duckblade.osrs.sailing.features.charting.WeatherTaskTracker;
 import com.duckblade.osrs.sailing.features.courier.CourierDestinationOverlay;
 import com.duckblade.osrs.sailing.features.crewmates.CrewmateOverheadMuter;
 import com.duckblade.osrs.sailing.features.facilities.LuffOverlay;
