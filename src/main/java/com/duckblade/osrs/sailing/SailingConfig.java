@@ -281,4 +281,14 @@ public interface SailingConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+			keyName = "enableLowDetail",
+			name = "Low Detail",
+			description = "Removes chosen objects from the scene that can hinder FPS",
+			position = 999
+	)
+	default boolean enableLowDetail()
+	{
+		return false;
+	}
 }
