@@ -4,18 +4,27 @@ import com.duckblade.osrs.sailing.SailingConfig;
 import com.duckblade.osrs.sailing.features.barracudatrials.RumBoatOverlay;
 import com.duckblade.osrs.sailing.features.facilities.CargoHoldTracker;
 import com.duckblade.osrs.sailing.features.facilities.LuffOverlay;
+import com.duckblade.osrs.sailing.features.facilities.SpeedBoostInfoBox;
 import com.duckblade.osrs.sailing.features.navigation.RapidsOverlay;
 import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialHelper;
+import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialTracker;
 import com.duckblade.osrs.sailing.features.charting.CurrentDuckTaskTracker;
 import com.duckblade.osrs.sailing.features.charting.SeaChartOverlay;
 import com.duckblade.osrs.sailing.features.charting.SeaChartPanelOverlay;
 import com.duckblade.osrs.sailing.features.charting.SeaChartTaskIndex;
 import com.duckblade.osrs.sailing.features.charting.WeatherTaskTracker;
+import com.duckblade.osrs.sailing.features.charting.MermaidTaskSolver;
 import com.duckblade.osrs.sailing.features.courier.CourierDestinationOverlay;
 import com.duckblade.osrs.sailing.features.crewmates.CrewmateOverheadMuter;
 import com.duckblade.osrs.sailing.features.mes.DeprioSailsOffHelm;
 import com.duckblade.osrs.sailing.features.mes.PrioritizeCargoHold;
-import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialTracker;
+import com.duckblade.osrs.sailing.features.oceanencounters.Castaway;
+import com.duckblade.osrs.sailing.features.oceanencounters.ClueCasket;
+import com.duckblade.osrs.sailing.features.oceanencounters.ClueTurtle;
+import com.duckblade.osrs.sailing.features.oceanencounters.GiantClam;
+import com.duckblade.osrs.sailing.features.oceanencounters.LostShipment;
+import com.duckblade.osrs.sailing.features.oceanencounters.MysteriousGlow;
+import com.duckblade.osrs.sailing.features.oceanencounters.OceanMan;
 import com.duckblade.osrs.sailing.features.util.BoatTracker;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.AbstractModule;
@@ -44,17 +53,26 @@ public class SailingModule extends AbstractModule
 		BarracudaTrialTracker barracudaTrialTracker,
 		BoatTracker boatTracker,
 		CargoHoldTracker cargoHoldTracker,
+		Castaway castaway,
+		ClueCasket clueCasket,
+		ClueTurtle clueTurtle,
 		CourierDestinationOverlay courierDestinationOverlay,
 		CrewmateOverheadMuter crewmateOverheadMuter,
 		CurrentDuckTaskTracker currentDuckTaskTracker,
 		DeprioSailsOffHelm deprioSailsOffHelm,
+		GiantClam giantClam,
+		LostShipment lostShipment,
 		LuffOverlay luffOverlay,
+		MermaidTaskSolver mermaidTaskSolver,
+		MysteriousGlow mysteriousGlow,
+		OceanMan oceanMan,
 		PrioritizeCargoHold prioritizeCargoHold,
 		RapidsOverlay rapidsOverlay,
 		RumBoatOverlay rumBoatOverlay,
 		SeaChartOverlay seaChartOverlay,
 		SeaChartPanelOverlay seaChartPanelOverlay,
 		SeaChartTaskIndex seaChartTaskIndex,
+		SpeedBoostInfoBox speedBoostInfoBox,
 		WeatherTaskTracker weatherTaskTracker
 	)
 	{
@@ -62,17 +80,26 @@ public class SailingModule extends AbstractModule
 			.add(barracudaTrialHelper)
 			.add(barracudaTrialTracker)
 			.add(boatTracker)
+			.add(castaway)
+			.add(clueCasket)
+			.add(clueTurtle)
 			.add(courierDestinationOverlay)
 			.add(crewmateOverheadMuter)
 			.add(currentDuckTaskTracker)
 			.add(deprioSailsOffHelm)
+			.add(giantClam)
+			.add(lostShipment)
 			.add(luffOverlay)
+			.add(mermaidTaskSolver)
+			.add(mysteriousGlow)
+			.add(oceanMan)
 			.add(prioritizeCargoHold)
 			.add(rapidsOverlay)
 			.add(rumBoatOverlay)
 			.add(seaChartOverlay)
 			.add(seaChartPanelOverlay)
 			.add(seaChartTaskIndex)
+			.add(speedBoostInfoBox)
 			.add(weatherTaskTracker);
 
 		// features still in development
