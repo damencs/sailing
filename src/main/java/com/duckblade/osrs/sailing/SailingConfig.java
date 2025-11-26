@@ -112,7 +112,7 @@ public interface SailingConfig extends Config
 	@Alpha
 	default Color lightningCloudStrikeColour()
 	{
-		return new Color(234, 234, 234);
+		return new Color(210, 109, 3);
 	}
 
 	@ConfigItem(

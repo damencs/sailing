@@ -86,10 +86,10 @@ public class LightningCloudsOverlay
 	{
 		if (e.getWorldView().isTopLevel())
 		{
-			clouds.clear();
-			client.getTopLevelWorldView().npcs().stream()
-					.filter(npc -> npc.getId() == NpcID.SAILING_SEA_STORMY_CLOUD)
-					.forEach(clouds::add);
+			client.getTopLevelWorldView()
+					.npcs()
+					.stream()
+					.forEach(clouds::remove);
 		}
 	}
 

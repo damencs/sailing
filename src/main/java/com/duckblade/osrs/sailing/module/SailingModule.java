@@ -46,10 +46,10 @@ public class SailingModule extends AbstractModule
 		CrewmateOverheadMuter crewmateOverheadMuter,
 		CurrentDuckTaskTracker currentDuckTaskTracker,
 		DeprioSailsOffHelm deprioSailsOffHelm,
+		LightningCloudsOverlay lightningCloudsOverlay,
 		LuffOverlay luffOverlay,
 		PrioritizeCargoHold prioritizeCargoHold,
 		RapidsOverlay rapidsOverlay,
-		LightningCloudsOverlay lightningCloudsOverlay,
 		SeaChartOverlay seaChartOverlay,
 		SeaChartPanelOverlay seaChartPanelOverlay,
 		SeaChartTaskIndex seaChartTaskIndex,
@@ -63,10 +63,10 @@ public class SailingModule extends AbstractModule
 			.add(crewmateOverheadMuter)
 			.add(currentDuckTaskTracker)
 			.add(deprioSailsOffHelm)
+			.add(lightningCloudsOverlay)
 			.add(luffOverlay)
 			.add(prioritizeCargoHold)
 			.add(rapidsOverlay)
-			.add(lightningCloudsOverlay)
 			.add(seaChartOverlay)
 			.add(seaChartPanelOverlay)
 			.add(seaChartTaskIndex)
