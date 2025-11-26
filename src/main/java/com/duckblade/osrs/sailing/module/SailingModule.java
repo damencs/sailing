@@ -38,48 +38,48 @@ public class SailingModule extends AbstractModule
 
 	@Provides
 	Set<PluginLifecycleComponent> lifecycleComponents(
-			@Named("developerMode") boolean developerMode,
+		@Named("developerMode") boolean developerMode,
 
-			BarracudaTrialTracker barracudaTrialTracker,
-			BarracudaTrialHelper barracudaTrialHelper,
-			RumBoatOverlay rumBoatOverlay,
-			BoatTracker boatTracker,
-			CargoHoldTracker cargoHoldTracker,
-			CourierDestinationOverlay courierDestinationOverlay,
-			CrewmateOverheadMuter crewmateOverheadMuter,
-			CurrentDuckTaskTracker currentDuckTaskTracker,
-			DeprioSailsOffHelm deprioSailsOffHelm,
-			LuffOverlay luffOverlay,
-			PrioritizeCargoHold prioritizeCargoHold,
-			RapidsOverlay rapidsOverlay,
-			SeaChartOverlay seaChartOverlay,
-			SeaChartPanelOverlay seaChartPanelOverlay,
-			SeaChartTaskIndex seaChartTaskIndex,
-			WeatherTaskTracker weatherTaskTracker
+		BarracudaTrialHelper barracudaTrialHelper,
+		BarracudaTrialTracker barracudaTrialTracker,
+		BoatTracker boatTracker,
+		CargoHoldTracker cargoHoldTracker,
+		CourierDestinationOverlay courierDestinationOverlay,
+		CrewmateOverheadMuter crewmateOverheadMuter,
+		CurrentDuckTaskTracker currentDuckTaskTracker,
+		DeprioSailsOffHelm deprioSailsOffHelm,
+		LuffOverlay luffOverlay,
+		PrioritizeCargoHold prioritizeCargoHold,
+		RapidsOverlay rapidsOverlay,
+		RumBoatOverlay rumBoatOverlay,
+		SeaChartOverlay seaChartOverlay,
+		SeaChartPanelOverlay seaChartPanelOverlay,
+		SeaChartTaskIndex seaChartTaskIndex,
+		WeatherTaskTracker weatherTaskTracker
 	)
 	{
 		var builder = ImmutableSet.<PluginLifecycleComponent>builder()
-				.add(barracudaTrialTracker)
-				.add(barracudaTrialHelper)
-				.add(rumBoatOverlay)
-				.add(boatTracker)
-				.add(courierDestinationOverlay)
-				.add(crewmateOverheadMuter)
-				.add(currentDuckTaskTracker)
-				.add(deprioSailsOffHelm)
-				.add(luffOverlay)
-				.add(prioritizeCargoHold)
-				.add(rapidsOverlay)
-				.add(seaChartOverlay)
-				.add(seaChartPanelOverlay)
-				.add(seaChartTaskIndex)
-				.add(weatherTaskTracker);
+			.add(barracudaTrialHelper)
+			.add(barracudaTrialTracker)
+			.add(boatTracker)
+			.add(courierDestinationOverlay)
+			.add(crewmateOverheadMuter)
+			.add(currentDuckTaskTracker)
+			.add(deprioSailsOffHelm)
+			.add(luffOverlay)
+			.add(prioritizeCargoHold)
+			.add(rapidsOverlay)
+			.add(rumBoatOverlay)
+			.add(seaChartOverlay)
+			.add(seaChartPanelOverlay)
+			.add(seaChartTaskIndex)
+			.add(weatherTaskTracker);
 
 		// features still in development
 		if (developerMode)
 		{
 			builder
-					.add(cargoHoldTracker);
+				.add(cargoHoldTracker);
 		}
 
 		return builder.build();
